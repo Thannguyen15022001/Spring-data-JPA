@@ -2,16 +2,13 @@ package com.project.spring_data_jpa.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Table(
         name="tbl_student",
         uniqueConstraints = @UniqueConstraint(  // defined unique for email no the same email
@@ -40,7 +37,12 @@ public class Student {
             nullable = false
     )
     private String email;
-    private String guardianName;
-    private String guardianEmail;
-    private String guardianPhone;
+
+    @Embedded
+    private Guardian guardian;
+
+    //Using embedded from class guardian
+    //private String guardianName;
+    //private String guardianEmail;
+    //private String guardianPhone;
 }
