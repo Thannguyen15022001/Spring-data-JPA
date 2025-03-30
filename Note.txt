@@ -1,0 +1,18 @@
+1.  @OneToOne(cascade = CascadeType.ALL)
+ - In Java Persistence API (JPA), the cascade attribute in the @OneToOne annotation(or other relationship annotations like @OneToMany, 
+   @ManyToOne, etc.) is used to define which operations will be automatically "cascaded" from the parent entity to the child entity 
+   when performing actions on the parent.
+   
+ - Types of CascadeType:
+	CascadeType	Description
+	PERSIST:	When entityManager.persist(A) is called, B will also be persisted if it's not already in the database.
+	MERGE:		When entityManager.merge(A) is called, B will also be merged.
+	REMOVE:		When entityManager.remove(A) is called, B will also be deleted from the database.
+	REFRESH:	When entityManager.refresh(A) is called, B will also be refreshed from the database.
+	DETACH:		When entityManager.detach(A) is called, B will also be detached from the Persistence Context.
+	ALL:		Includes all of the above cascade types.
+	
+💡 When should you use cascade?
+	+ Use it when you want to manage the lifecycle of the child entity through the parent entity.
+	+ Avoid using REMOVE or ALL carelessly, as it may lead to unintended data deletion 
+	if the relationship between entities is not properly managed.
