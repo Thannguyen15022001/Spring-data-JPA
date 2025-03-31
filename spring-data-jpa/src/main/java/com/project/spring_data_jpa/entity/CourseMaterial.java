@@ -29,9 +29,10 @@ public class CourseMaterial {
 
     @OneToOne(
             //cascade = CascadeType.ALL
-            cascade = CascadeType.PERSIST,  //Add entity
-            fetch = FetchType.LAZY      //Get only data of courseMaterial
-            //fetch = FetchType.EAGER      //Get all data of courseMaterial and course entity
+            cascade = CascadeType.PERSIST,      //Add entity
+            fetch = FetchType.LAZY,             //Get only data of courseMaterial
+            optional = false                    //When save course must have course material
+            //fetch = FetchType.EAGER           //Get all data of courseMaterial and course entity
     )
     @JoinColumn(
             name = "course_id",   //name of column's courseID
