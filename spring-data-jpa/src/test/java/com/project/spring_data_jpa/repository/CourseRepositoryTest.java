@@ -7,7 +7,10 @@ import com.project.spring_data_jpa.entity.Teacher;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 
+import javax.print.attribute.standard.PageRanges;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,8 +67,26 @@ class CourseRepositoryTest {
                 .credit(12)
                 //.courseMaterial(courseMaterial)
                 .build();
-        course.addStudent(student);
+        //course.addStudent(student);
 
         courseRepository.save(course);
+    }
+
+    @Test
+    public void findAllPagination(){
+        Pageable firstPageWithThreeRecords = (Pageable) PageRequest.of(0,3);
+
+        Pageable secondPageWithTwoRecords = (Pageable) PageRequest.of(0,2);
+
+        List<Course> courses = courseRepository.findAll(firstPageWithThreeRecords).getContent();
+
+        long totalElements = courseRepository.findAll(firstPageWithThreeRecords).getTotalElements();
+
+        long totalPages = courseRepository.findAll(firstPageWithThreeRecords).getTotalPages();
+
+        System.out.println("Total elements: " + totalElements);
+        System.out.println("Total pages: " + totalPages);
+
+        System.out.println("Course: " + courses);
     }
 }

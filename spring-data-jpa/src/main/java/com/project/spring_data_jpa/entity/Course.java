@@ -2,10 +2,7 @@ package com.project.spring_data_jpa.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString(exclude = "students")
 public class Course {
 
     @Id
@@ -49,6 +47,7 @@ public class Course {
 
     @ManyToMany(
             cascade = CascadeType.ALL
+            //fetch = FetchType.EAGER
     )
     @JoinTable(
             name = "student_course_mapping",
